@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:Client.ViewModels"
+             x:Class="Client.Pages.RegistrationsPage"
+             Title="RegistrationsPage">
+
+	<Grid Padding="20" ColumnSpacing="20">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<StackLayout Grid.Column="0">
+			<Entry Text="{Binding RegistrationToGet, Mode=TwoWay}" Placeholder="ABCDEFGI" WidthRequest="150"/>
+			<Button Margin="0,5,0,15" Text="Oglej" Command="{Binding OglejCommand}"/>
+
+			<Entry Text="{Binding RegistrationToPush, Mode=TwoWay}" Placeholder="ABCDEFGI" WidthRequest="150"/>
+			<Entry Text="{Binding RegionToPush, Mode=TwoWay}" Placeholder="AZI" WidthRequest="150"/>
+			<Button Margin="0,5,0,0" Text="Registriraj" Command="{Binding RegistrirajCommand}"/>
+		</StackLayout>
+
+		<Grid Grid.Column="1" RowSpacing="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<Label Padding="50,0,0,0" x:Name="InfoBox" Text="{Binding LabelText, Mode=TwoWay}" 
+                   VerticalOptions="Center" HorizontalOptions="Start" Grid.Row="0"/>
+
+			<CollectionView ItemsSource="{Binding Registrations}" Grid.Row="1">
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<StackLayout Padding="5">
+							<Label Text="{Binding Id}" FontAttributes="Bold" />
+							<Label Text="{Binding Region}" FontSize="12"/>
+						</StackLayout>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+		</Grid>
+	</Grid>
+</ContentPage>

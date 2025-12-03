@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:vm="clr-namespace:Client.ViewModels"
+             x:Class="Client.Pages.LocationsPage"
+             Title="LocationsPage">
+
+	<Grid Padding="20" ColumnSpacing="20">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<StackLayout Grid.Column="0">
+			<Entry Text="{Binding CarId, Mode=TwoWay}" Placeholder="Id avta" WidthRequest="150"/>
+			<Entry Text="{Binding DniNazaj, Mode=TwoWay}" Keyboard="Numeric" Placeholder="Dni nazaj" WidthRequest="150"/>
+			<Button Margin="0,5,0,0" Text="Ogled" Command="{Binding LookupLocationsCommand}"/>
+		</StackLayout>
+
+
+		<Grid Grid.Column="1" RowSpacing="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<Label Padding="50,0,0,0" x:Name="InfoBox" Text="{Binding LabelText}" 
+                   VerticalOptions="Center" HorizontalOptions="Start" Grid.Row="0"/>
+
+			<CollectionView ItemsSource="{Binding Locations}" Grid.Row="1">
+				<CollectionView.ItemTemplate>
+					<DataTemplate>
+						<StackLayout Padding="5">
+							<Label Text="{Binding CarId}" FontAttributes="Bold" />
+							<Label Text="{Binding Latitude, StringFormat='Lat: {0}'}" />
+							<Label Text="{Binding Longitude, StringFormat='Lon: {0}'}" />
+							<Label Text="{Binding Time}" FontSize="12"/>
+						</StackLayout>
+					</DataTemplate>
+				</CollectionView.ItemTemplate>
+			</CollectionView>
+		</Grid>
+	</Grid>
+</ContentPage>
